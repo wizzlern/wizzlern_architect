@@ -26,3 +26,4 @@ dependencies[] = rdf
 
 ; Install required features.
 dependencies[] = wizzlern_architect_base
+dependencies[] = wizzlern_architect_dtd2

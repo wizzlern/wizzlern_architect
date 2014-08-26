@@ -1,0 +1,147 @@
+<?php
+/**
+ * @file
+ * Install, update and uninstall functions for the Wizzlern Drupal Architect
+ * installation profile.
+ */
+
+/**
+ * Implements hook_install().
+ *
+ * Perform actions to set up the site for this profile.
+ *
+ * @see system_install()
+ */
+function wizzlern_architect_install() {
+
+  // Enable some standard blocks.
+  $default_theme = variable_get('theme_default', 'bartik');
+  $admin_theme = 'seven';
+  $blocks = array(
+    array(
+      'module' => 'system',
+      'delta' => 'main',
+      'theme' => $default_theme,
+      'status' => 1,
+      'weight' => 0,
+      'region' => 'content',
+      'pages' => '',
+      'cache' => -1,
+    ),
+    array(
+      'module' => 'user',
+      'delta' => 'login',
+      'theme' => $default_theme,
+      'status' => 1,
+      'weight' => 0,
+      'region' => 'header',
+      'pages' => '',
+      'cache' => -1,
+    ),
+    array(
+      'module' => 'system',
+      'delta' => 'powered-by',
+      'theme' => $default_theme,
+      'status' => 1,
+      'weight' => 10,
+      'region' => 'footer',
+      'pages' => '',
+      'cache' => -1,
+    ),
+    array(
+      'module' => 'system',
+      'delta' => 'help',
+      'theme' => $default_theme,
+      'status' => 1,
+      'weight' => 0,
+      'region' => 'help',
+      'pages' => '',
+      'cache' => -1,
+    ),
+    array(
+      'module' => 'system',
+      'delta' => 'main',
+      'theme' => $admin_theme,
+      'status' => 1,
+      'weight' => 0,
+      'region' => 'content',
+      'pages' => '',
+      'cache' => -1,
+    ),
+    array(
+      'module' => 'system',
+      'delta' => 'help',
+      'theme' => $admin_theme,
+      'status' => 1,
+      'weight' => 0,
+      'region' => 'help',
+      'pages' => '',
+      'cache' => -1,
+    ),
+  );
+  $query = db_insert('block')->fields(array('module', 'delta', 'theme', 'status', 'weight', 'region', 'pages', 'cache'));
+  foreach ($blocks as $block) {
+    $query->values($block);
+  }
+  $query->execute();
+
+}
+
+/**
+ * Implements hook_install_tasks().
+ */
+function wizzlern_architect_install_tasks() {
+  // Make sure we have at least 64M of memory.
+  if (ini_get('memory_limit') != '-1' && ini_get('memory_limit') < '64M') {
+    ini_set('memory_limit', '64M');
+  }
+
+  return array(
+    'wizzlern_architect_revert_features' => array(
+      'display' => FALSE,
+    ),
+    'wizzlern_architect_create_users' => array(
+      'display' => FALSE,
+    ),
+  );
+}
+
+/*
+ * Install task callback: Revert Features after the installation.
+ */
+function wizzlern_architect_revert_features() {
+  // Revert Features components to ensure that they are in their default states.
+  $revert = array(
+    'wizzlern_architect_base' => array('variable'),
+  );
+
+  features_revert($revert);
+}
+
+/*
+ * Install task callback: Create some users.
+ */
+function wizzlern_architect_create_users() {
+
+  // Create editor user
+  $role = user_role_load_by_name('redactie');
+  $fields = array(
+    'name' => 'redactie',
+    'mail' => 'redactie@wizzlern.nl',
+    'pass' => 'redactie',
+    'status' => 1,
+    'roles' => array($role->rid => $role->name),
+  );
+  user_save(NULL, $fields);
+
+  // Create columnist user
+  $role = user_role_load_by_name('columnist');
+  $fields = array(
+    'name' => 'columnist',
+    'mail' => 'columnist@wizzlern.nl',
+    'pass' => 'columnist',
+    'status' => 1,
+    'roles' => array($role->rid => $role->name),
+  );
+  user_save(NULL, $fields);
+}

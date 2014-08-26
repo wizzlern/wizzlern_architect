@@ -1,0 +1,28 @@
+name = Wizzlern Drupal Architect
+description = Install Drupal for the Wizzlern Drupal Architecture training.
+version = 7.x-1.0
+core = 7.x
+project = wizzlern
+
+; Install required core modules.
+dependencies[] = block
+dependencies[] = comment
+dependencies[] = contextual
+dependencies[] = help
+dependencies[] = image
+dependencies[] = list
+dependencies[] = menu
+dependencies[] = number
+dependencies[] = options
+dependencies[] = path
+dependencies[] = taxonomy
+dependencies[] = dblog
+dependencies[] = shortcut
+dependencies[] = toolbar
+dependencies[] = overlay
+dependencies[] = field_ui
+dependencies[] = file
+dependencies[] = rdf
+
+; Install required features.
+dependencies[] = wizzlern_architect_base

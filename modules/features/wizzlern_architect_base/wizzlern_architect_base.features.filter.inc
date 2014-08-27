@@ -22,7 +22,7 @@ function wizzlern_architect_base_filter_default_formats() {
         'weight' => 1,
         'status' => 1,
         'settings' => array(
-          'allowed_html' => '<a> <em> <strong> <ul> <ol> <li> <img>',
+          'allowed_html' => '<p> <a> <em> <strong> <ul> <ol> <li> <img>',
           'filter_html_help' => 1,
           'filter_html_nofollow' => 0,
         ),

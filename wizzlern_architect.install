@@ -113,7 +113,6 @@ function wizzlern_architect_revert_features() {
   // Revert Features components to ensure that they are in their default states.
   $revert = array(
     'wizzlern_architect_base' => array('variable'),
-//    'wizzlern_architect_dtd2' => array(),
   );
 
   features_revert($revert);

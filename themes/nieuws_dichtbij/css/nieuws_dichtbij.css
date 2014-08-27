@@ -1,0 +1,13 @@
+#content {
+  width: 100%;
+}
+
+.one-sidebar #content {
+  width: 49%;
+  float: left;
+}
+
+#sidebar-first {
+  width: 49%;
+  float: right;
+}

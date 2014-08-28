@@ -124,6 +124,14 @@ function wizzlern_architect_revert_features() {
  */
 function wizzlern_architect_create_users() {
 
+  // Assign user 1 the "administrator" role.
+  $role = user_role_load_by_name('administrator');
+  $user = user_load(1);
+  $fields = array(
+    'roles' => array($role->rid => $role->name),
+  );
+  user_save($user, $fields);
+
   // Create editor user
   $role = user_role_load_by_name('redactie');
   $fields = array(

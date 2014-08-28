@@ -10,6 +10,6 @@
  * Allows the profile to alter the site configuration form.
  */
 function wizzlern_architect_form_install_configure_form_alter(&$form, $form_state) {
-  // Pre-populate the site name.
+  // Deny access to the site name field.
   $form['site_information']['site_name']['#access'] = FALSE;
 }

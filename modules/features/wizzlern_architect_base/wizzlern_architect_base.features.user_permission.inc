@@ -15,6 +15,7 @@ function wizzlern_architect_base_user_default_permissions() {
     'name' => 'access administration pages',
     'roles' => array(
       'administrator' => 'administrator',
+      'redactie' => 'redactie',
     ),
     'module' => 'system',
   );
@@ -75,6 +76,7 @@ function wizzlern_architect_base_user_default_permissions() {
     'name' => 'access overlay',
     'roles' => array(
       'administrator' => 'administrator',
+      'redactie' => 'redactie',
     ),
     'module' => 'overlay',
   );
@@ -102,6 +104,7 @@ function wizzlern_architect_base_user_default_permissions() {
     'name' => 'access toolbar',
     'roles' => array(
       'administrator' => 'administrator',
+      'redactie' => 'redactie',
     ),
     'module' => 'toolbar',
   );
